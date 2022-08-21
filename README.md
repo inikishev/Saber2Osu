@@ -1,1 +1,1 @@
-guys this is the first time i do any kind of programmign and i already want to kill myself and also i am stuck because idk hpw to convert beat saber timings into osu timings it just dosetnt work help
+it works except idk how to convert beat saber timings into osu timings. obviously it doesnt really work because timings are much faster than they are supposed to be AND I DONT KNOW HOW TO FIX THAT. help
