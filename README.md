@@ -1,1 +1,1 @@
-it works except idk how to convert beat saber timings into osu timings. obviously it doesnt really work because timings are much faster than they are supposed to be AND I DONT KNOW HOW TO FIX THAT. help
+this is supposed to convert beat saber maps into osu maps and it works except it doesnt because i dont know how to convert beat saber timings into osu timings so at the moment it just multiplies them by bpm which doesnt really work.
