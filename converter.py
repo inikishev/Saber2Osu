@@ -6,6 +6,7 @@ from tkinter.filedialog import askopenfilename
 filename = askopenfilename(title='select beat saber map .zip', filetypes=[
                     ("beat saber map", ".zip"),
                 ])
+
 if filename=='':
    import ctypes  # An included library with Python install.   
    ctypes.windll.user32.MessageBoxW(0, "selecting file was cancelled", "hi", 1)
@@ -81,7 +82,7 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
    lineLayer = [i for i in range(len(bs)) if bs.startswith("_lineLayer", i)]
    #type = [i for i in range(len(bs)) if bs.startswith("_type", i)]
    value = [i for i in range(len(bs)) if bs.startswith("_value", i)]
-   #cutDirection = [i for i in range(len(bs)) if bs.startswith("_cutDirection", i)]
+   cutDirection = [i for i in range(len(bs)) if bs.startswith("_cutDirection", i)]
 
 
 
@@ -91,17 +92,24 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
    osu = "osu file format v14\n\n[General]\nAudioFilename: song.ogg\nAudioLeadIn: 0\nPreviewTime: -1\nCountdown: 0\nSampleSet: Normal\nStackLeniency: 0.7\nMode: 0\nLetterboxInBreaks: 0\nWidescreenStoryboard: 0\n\n[Editor]\nDistanceSpacing: 1.1\nBeatDivisor: 4\nGridSize: 8\nTimelineZoom: 1.6\n\n[Metadata]\nTitle:" + songName + "\nTitleUnicode:" + songName +"\nArtist:" + songAuthorName + "\nArtistUnicode:" + songAuthorName + "\nCreator:" + levelAuthorName + "\nVersion:" + filename + "\nSource:\nTags:BeatSaber\nBeatmapID:0\nBeatmapSetID:-1\n\n[Difficulty]\nHPDrainRate:" + str(HPDrainRate) + "\nCircleSize:" + str(CircleSize) + "\nOverallDifficulty:" + str(OverallDifficulty) + "\nApproachRate:" + str(ApproachRate) + "\nSliderMultiplier:" + str(SliderMultiplier) + "\nSliderTickRate:" + str(SliderTickRate) + "\n\n[Events]\n//Background and Video events\n//Break Periods\n//Storyboard Layer 0 (Background)\n//Storyboard Layer 1 (Fail)\n//Storyboard Layer 2 (Pass)\n//Storyboard Layer 3 (Foreground)\n//Storyboard Layer 4 (Overlay)\n//Storyboard Sound Samples\n\n[TimingPoints]\n0,352.941176470588,4,1,0,100,1,0\n\n\n[HitObjects]\n"
 
    if len(value) > 0:
-      for i in range(len(value)):
-         osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
+      #for i in range(len(value)):
+         #osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
       del time[:len(value)]
 
    if len(time) > len(lineLayer):
-      for i in range(len(lineLayer), len(time)):
-         osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
+      #for i in range(len(lineLayer), len(time)):
+         #osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
       del time[len(lineLayer):len(time)]
-         
-   for i in range(len(time)):
-      osu = osu + str(int(bs[lineIndex[i]+13])*100) + ',' + str(int(bs[lineLayer[i]+13])*100) + ',' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
+      
+   osu = osu + str((int(bs[lineIndex[0]+13])*100)+170) + ',' + str((int(bs[lineLayer[0]+13])*100)+140) + ',' + str(convert(bpm, bs[(time[0]+8):(time[0]+20)])) + ',1,0,0:0:0:0:\n'
+   
+   for i in range(1, len(time)):
+      if abs(float(bs[(time[i]+8):(time[i]+20)])-float(bs[(time[i-1]+8):(time[i-1]+20)])) > 0.01:
+         osu = osu + str((int(bs[lineIndex[i]+13])*100)+170
+         #+((4-int(bs[cutDirection[i]+16]))*10)
+         ) + ',' + str((int(bs[lineLayer[i]+13])*100)+140
+         #-((4-int(bs[cutDirection[i]+16]))*10)
+         ) + ',' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
 
 
    with open(filenameosu, "w+") as myfile:
@@ -136,3 +144,4 @@ from pathlib import Path
 p = Path(pathname + '/' + FileNamer + '.zip')
 p.rename(p.with_suffix('.osz'))
 shutil.rmtree(tempname)
+print('Done!')
