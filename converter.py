@@ -7,6 +7,8 @@ filename = askopenfilename(title='select beat saber map .zip', filetypes=[
                     ("beat saber map", ".zip"),
                 ])
 if filename=='':
+   import ctypes  # An included library with Python install.   
+   ctypes.windll.user32.MessageBoxW(0, "selecting file was cancelled", "hi", 1)
    import sys
    sys.exit()
    
@@ -48,8 +50,15 @@ bpm = (info[info.find("_beatsPerMinute")+18:info.find("_songTimeOffset")-3])
 FileNamer = songAuthorName + " - " + songName + " (" + levelAuthorName + ")"
 print("Song name: " + songName + "\nSong author: " + songAuthorName + "\nBeatmap author: " + levelAuthorName + "\nBPM: " + bpm)
 
+os.chdir(pathname)
+if os.path.exists(FileNamer + '.osz') == True:
+   import ctypes  # An included library with Python install.   
+   ctypes.windll.user32.MessageBoxW(0, FileNamer + '.osu already exists, delete it and rerun to regenerate', "hello", 1)
+   shutil.rmtree(tempname)
+   import sys
+   sys.exit()
    
-
+os.chdir(tempname)
 
 # create string from file
 def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRate, SliderMultiplier, SliderTickRate):
@@ -84,7 +93,12 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
    if len(value) > 0:
       for i in range(len(value)):
          osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
-         time.pop(i)
+      del time[:len(value)]
+
+   if len(time) > len(lineLayer):
+      for i in range(len(lineLayer), len(time)):
+         osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
+      del time[len(lineLayer):len(time)]
          
    for i in range(len(time)):
       osu = osu + str(int(bs[lineIndex[i]+13])*100) + ',' + str(int(bs[lineLayer[i]+13])*100) + ',' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
