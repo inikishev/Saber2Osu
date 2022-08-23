@@ -89,7 +89,7 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
    # bpms = float(bpm)/60000
    # print(bpms)
    # the beginning of the osu file with dumb parameters but idk how to change them so circles are really slow and dumb and i dont like them
-   osu = "osu file format v14\n\n[General]\nAudioFilename: song.ogg\nAudioLeadIn: 0\nPreviewTime: -1\nCountdown: 0\nSampleSet: Normal\nStackLeniency: 0.7\nMode: 0\nLetterboxInBreaks: 0\nWidescreenStoryboard: 0\n\n[Editor]\nDistanceSpacing: 1.1\nBeatDivisor: 4\nGridSize: 8\nTimelineZoom: 1.6\n\n[Metadata]\nTitle:" + songName + "\nTitleUnicode:" + songName +"\nArtist:" + songAuthorName + "\nArtistUnicode:" + songAuthorName + "\nCreator:" + levelAuthorName + "\nVersion:" + filename + "\nSource:\nTags:BeatSaber\nBeatmapID:0\nBeatmapSetID:-1\n\n[Difficulty]\nHPDrainRate:" + str(HPDrainRate) + "\nCircleSize:" + str(CircleSize) + "\nOverallDifficulty:" + str(OverallDifficulty) + "\nApproachRate:" + str(ApproachRate) + "\nSliderMultiplier:" + str(SliderMultiplier) + "\nSliderTickRate:" + str(SliderTickRate) + "\n\n[Events]\n//Background and Video events\n//Break Periods\n//Storyboard Layer 0 (Background)\n//Storyboard Layer 1 (Fail)\n//Storyboard Layer 2 (Pass)\n//Storyboard Layer 3 (Foreground)\n//Storyboard Layer 4 (Overlay)\n//Storyboard Sound Samples\n\n[TimingPoints]\n0,352.941176470588,4,1,0,100,1,0\n\n\n[HitObjects]\n"
+   osu = "osu file format v14\n\n[General]\nAudioFilename: song.ogg\nAudioLeadIn: 0\nPreviewTime: -1\nCountdown: 0\nSampleSet: Normal\nStackLeniency: 0.5\nMode: 0\nLetterboxInBreaks: 0\nWidescreenStoryboard: 0\n\n[Editor]\nDistanceSpacing: 1.1\nBeatDivisor: 4\nGridSize: 8\nTimelineZoom: 1.6\n\n[Metadata]\nTitle:" + songName + "\nTitleUnicode:" + songName +"\nArtist:" + songAuthorName + "\nArtistUnicode:" + songAuthorName + "\nCreator:" + levelAuthorName + "\nVersion:" + filename + "\nSource:\nTags:BeatSaber\nBeatmapID:0\nBeatmapSetID:-1\n\n[Difficulty]\nHPDrainRate:" + str(HPDrainRate) + "\nCircleSize:" + str(CircleSize) + "\nOverallDifficulty:" + str(OverallDifficulty) + "\nApproachRate:" + str(ApproachRate) + "\nSliderMultiplier:" + str(SliderMultiplier) + "\nSliderTickRate:" + str(SliderTickRate) + "\n\n[Events]\n//Background and Video events\n//Break Periods\n//Storyboard Layer 0 (Background)\n//Storyboard Layer 1 (Fail)\n//Storyboard Layer 2 (Pass)\n//Storyboard Layer 3 (Foreground)\n//Storyboard Layer 4 (Overlay)\n//Storyboard Sound Samples\n\n[TimingPoints]\n0," + str(30000/float(bpm)) + ",4,1,0,100,1,0\n\n\n[HitObjects]\n"
 
    if len(value) > 0:
       #for i in range(len(value)):
@@ -101,13 +101,13 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
          #osu = osu + '320,240,' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
       del time[len(lineLayer):len(time)]
       
-   osu = osu + str((int(bs[lineIndex[0]+13])*100)+170) + ',' + str((int(bs[lineLayer[0]+13])*100)+140) + ',' + str(convert(bpm, bs[(time[0]+8):(time[0]+20)])) + ',1,0,0:0:0:0:\n'
+   osu = osu + str((int(bs[lineIndex[0]+13])*100)+85) + ',' + str((int(bs[lineLayer[0]+13])*100)+70) + ',' + str(convert(bpm, bs[(time[0]+8):(time[0]+20)])) + ',1,0,0:0:0:0:\n'
    
    for i in range(1, len(time)):
       if abs(float(bs[(time[i]+8):(time[i]+20)])-float(bs[(time[i-1]+8):(time[i-1]+20)])) > 0.01:
-         osu = osu + str((int(bs[lineIndex[i]+13])*100)+170
+         osu = osu + str((int(bs[lineIndex[i]+13])*100)+85
          #+((4-int(bs[cutDirection[i]+16]))*10)
-         ) + ',' + str((int(bs[lineLayer[i]+13])*100)+140
+         ) + ',' + str((int(bs[lineLayer[i]+13])*100)+70
          #-((4-int(bs[cutDirection[i]+16]))*10)
          ) + ',' + str(convert(bpm, bs[(time[i]+8):(time[i]+20)])) + ',1,0,0:0:0:0:\n'
 
@@ -117,26 +117,31 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
       
    return(filenameosu + ' generated from ' + filenamedat)
 
-print(difficulty('Normal', 5, 3.5, 6, 8, 1.4, 1))
-print(difficulty('Hard', 5, 4.4, 8, 9, 2.5, 1))
-print(difficulty('Expert', 5.5, 4.8, 8.5, 9, 3.2, 1))
-print(difficulty('ExpertPlus', 5.6, 4.9, 8.6, 9, 3.3, 1))
-print(difficulty('OneSaberNormal', 5, 3.5, 6, 8, 1.4, 1))
-print(difficulty('OneSaberHard', 5, 4.4, 8, 9, 2.5, 1))
-print(difficulty('OneSaberExpert', 5.5, 4.8, 8.5, 9, 3.2, 1))
-print(difficulty('OneSaberExpertPlus', 5.6, 4.9, 8.6, 9, 3.3, 1))
-print(difficulty('NoArrowsNormal', 5, 3.5, 6, 8, 1.4, 1))
-print(difficulty('NoArrowsHard', 5, 4.4, 8, 9, 2.5, 1))
-print(difficulty('NoArrowsExpert', 5.5, 4.8, 8.5, 9, 3.2, 1))
-print(difficulty('NoArrowsExpertPlus', 5.6, 4.9, 8.6, 9, 3.3, 1))
-print(difficulty('90DegreeNormal', 5, 3.5, 6, 8, 1.4, 1))
-print(difficulty('90DegreeHard', 5, 4.4, 8, 9, 2.5, 1))
-print(difficulty('90DegreeExpert', 5.5, 4.8, 8.5, 9, 3.2, 1))
-print(difficulty('90DegreeExpertPlus', 5.6, 4.9, 8.6, 9, 3.3, 1))
-print(difficulty('360DegreeNormal', 5, 3.5, 6, 8, 1.4, 1))
-print(difficulty('360DegreeHard', 5, 4.4, 8, 9, 2.5, 1))
-print(difficulty('360DegreeExpert', 5.5, 4.8, 8.5, 9, 3.2, 1))
-print(difficulty('360DegreeExpertPlus', 5.6, 4.9, 8.6, 9, 3.3, 1))
+#HPDrainRate, CircleSize, OverallDifficulty, ApproachRate, SliderMultiplier, SliderTickRate
+print(difficulty('Normal',             2,    2,    5,    8.5, 1.4, 1))
+print(difficulty('Hard',               3,    3,    5.5,  9.5, 2.5, 1))
+print(difficulty('Expert',             3.5,  3.5,  6,    9.75, 3.2, 1))
+print(difficulty('ExpertPlus',         4,    4,    6.5,  10, 3.3, 1))
+
+print(difficulty('OneSaberNormal',     2,    2,    5,    8.5, 1.4, 1))
+print(difficulty('OneSaberHard',       3,    3,    5.5,  9.5, 2.5, 1))
+print(difficulty('OneSaberExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
+print(difficulty('OneSaberExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+
+print(difficulty('NoArrowsNormal',     2,    2,    5,    8.5, 1.4, 1))
+print(difficulty('NoArrowsHard',       3,    3,    5.5,  9.5, 2.5, 1))
+print(difficulty('NoArrowsExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
+print(difficulty('NoArrowsExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+
+print(difficulty('90DegreeNormal',     2,    2,    5,    8.5, 1.4, 1))
+print(difficulty('90DegreeHard',       3,    3,    5.5,  9.5, 2.5, 1))
+print(difficulty('90DegreeExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
+print(difficulty('90DegreeExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+
+print(difficulty('360DegreeNormal',    2,    2,    5,    8.5, 1.4, 1))
+print(difficulty('360DegreeHard',      3,    3,    5.5,  9.5, 2.5, 1))
+print(difficulty('360DegreeExpert',    3.5,  3.5,  6,    9.75, 3.2, 1))
+print(difficulty('360DegreeExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
 
 os.chdir(pathname)
 shutil.make_archive(FileNamer, 'zip', tempname)
