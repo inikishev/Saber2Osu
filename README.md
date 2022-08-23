@@ -1,1 +1,1 @@
-this is supposed to convert beat saber maps into osu maps and it works except it doesnt because i dont know how to convert beat saber timings into osu timings so at the moment it just multiplies them by bpm which doesnt really work.
+If you launch it, it will let you choose a file - point it to a beat saber map .zip, and it will generate an .osu file next to it. However I only tested it for beat sage maps. I do want to make it so that people can actually use this without having to use python, if I manage to do so
