@@ -1,7 +1,3 @@
-# it needs to just not work when file exists
-import os
-import shutil
-
 from tkinter.filedialog import askopenfilename
 filename = askopenfilename(title='select beat saber map .zip', filetypes=[
                     ("beat saber map", ".zip"),
@@ -19,8 +15,10 @@ tempname= pathname + "/BeatSaberToOsuConverter" + str(num)
 import zipfile
 with zipfile.ZipFile(filename,"r") as zip_ref:
     zip_ref.extractall(tempname)
+import os
 os.chdir(tempname)
 
+import shutil
 if os.path.exists('Info.dat') == False:
    import ctypes
    ctypes.windll.user32.MessageBoxW(0, "There is no Info.dat in it", "Not a beat saber .zip file", 1)
@@ -47,7 +45,7 @@ songName = (info[info.find("_songName")+13:info.find("_songSubName")-4])
 songAuthorName = (info[info.find("_songAuthorName")+19:info.find("_levelAuthorName")-4])
 levelAuthorName = (info[info.find("_levelAuthorName")+20:info.find("_beatsPerMinute")-4])
 bpm = (info[info.find("_beatsPerMinute")+18:info.find("_songTimeOffset")-3])
-FileNamer = songAuthorName + " - " + songName + " (" + levelAuthorName + ")"
+FileNamer = songAuthorName + " - " + songName + " (" + levelAuthorName + ") [BeatSaberToOSU]"
 print("Song name: " + songName + "\nSong author: " + songAuthorName + "\nBeatmap author: " + levelAuthorName + "\nBPM: " + bpm)
 
 os.chdir(pathname)
@@ -64,7 +62,7 @@ os.chdir(tempname)
 def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRate, SliderMultiplier, SliderTickRate):
 
    filenamedat=filename + '.dat'
-   filenameosu=filename + '.osu'
+   filenameosu=songAuthorName + ' - ' + songName + ' [' + filename + '] (' + levelAuthorName + ' [BeatSaberToOSU]).osu'
    
    if not os.path.exists(filenamedat):
       return(filenamedat + " Doesn't exist, skipping")
