@@ -8,8 +8,7 @@ filename = askopenfilename(title='select beat saber map .zip', filetypes=[
                 ])
 
 if filename=='':
-   import ctypes  # An included library with Python install.   
-   ctypes.windll.user32.MessageBoxW(0, "selecting file was cancelled", "hi", 1)
+   import ctypes
    import sys
    sys.exit()
    
@@ -23,7 +22,7 @@ with zipfile.ZipFile(filename,"r") as zip_ref:
 os.chdir(tempname)
 
 if os.path.exists('Info.dat') == False:
-   import ctypes  # An included library with Python install.   
+   import ctypes
    ctypes.windll.user32.MessageBoxW(0, "There is no Info.dat in it", "Not a beat saber .zip file", 1)
    shutil.rmtree(tempname)
    import sys
@@ -118,30 +117,30 @@ def difficulty(filename, HPDrainRate, CircleSize, OverallDifficulty, ApproachRat
    return(filenameosu + ' generated from ' + filenamedat)
 
 #HPDrainRate, CircleSize, OverallDifficulty, ApproachRate, SliderMultiplier, SliderTickRate
-print(difficulty('Normal',             2,    2,    5,    8.5, 1.4, 1))
-print(difficulty('Hard',               3,    3,    5.5,  9.5, 2.5, 1))
-print(difficulty('Expert',             3.5,  3.5,  6,    9.75, 3.2, 1))
-print(difficulty('ExpertPlus',         4,    4,    6.5,  10, 3.3, 1))
+print(difficulty('Normal',             2,    2,    7.5,    8.5, 1.4, 1))
+print(difficulty('Hard',               3,    3,    7.5,  9.5, 2.5, 1))
+print(difficulty('Expert',             3.5,  3.5,  7.5,    9.75, 3.2, 1))
+print(difficulty('ExpertPlus',         4,    4,    7.5,  10, 3.3, 1))
 
-print(difficulty('OneSaberNormal',     2,    2,    5,    8.5, 1.4, 1))
-print(difficulty('OneSaberHard',       3,    3,    5.5,  9.5, 2.5, 1))
-print(difficulty('OneSaberExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
-print(difficulty('OneSaberExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+print(difficulty('OneSaberNormal',     2,    2,    7.5,    8.5, 1.4, 1))
+print(difficulty('OneSaberHard',       3,    3,    7.5,  9.5, 2.5, 1))
+print(difficulty('OneSaberExpert',     3.5,  3.5,  7.5,    9.75, 3.2, 1))
+print(difficulty('OneSaberExpertPlus', 4,    4,    7.5,  10, 3.3, 1))
 
-print(difficulty('NoArrowsNormal',     2,    2,    5,    8.5, 1.4, 1))
-print(difficulty('NoArrowsHard',       3,    3,    5.5,  9.5, 2.5, 1))
-print(difficulty('NoArrowsExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
-print(difficulty('NoArrowsExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+print(difficulty('NoArrowsNormal',     2,    2,    7.5,    8.5, 1.4, 1))
+print(difficulty('NoArrowsHard',       3,    3,    7.5,  9.5, 2.5, 1))
+print(difficulty('NoArrowsExpert',     3.5,  3.5,  7.5,    9.75, 3.2, 1))
+print(difficulty('NoArrowsExpertPlus', 4,    4,    7.5,  10, 3.3, 1))
 
-print(difficulty('90DegreeNormal',     2,    2,    5,    8.5, 1.4, 1))
-print(difficulty('90DegreeHard',       3,    3,    5.5,  9.5, 2.5, 1))
-print(difficulty('90DegreeExpert',     3.5,  3.5,  6,    9.75, 3.2, 1))
-print(difficulty('90DegreeExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+print(difficulty('90DegreeNormal',     2,    2,    7.5,    8.5, 1.4, 1))
+print(difficulty('90DegreeHard',       3,    3,    7.5,  9.5, 2.5, 1))
+print(difficulty('90DegreeExpert',     3.5,  3.5,  7.5,    9.75, 3.2, 1))
+print(difficulty('90DegreeExpertPlus', 4,    4,    7.5,  10, 3.3, 1))
 
-print(difficulty('360DegreeNormal',    2,    2,    5,    8.5, 1.4, 1))
-print(difficulty('360DegreeHard',      3,    3,    5.5,  9.5, 2.5, 1))
-print(difficulty('360DegreeExpert',    3.5,  3.5,  6,    9.75, 3.2, 1))
-print(difficulty('360DegreeExpertPlus', 4,    4,    6.5,  10, 3.3, 1))
+print(difficulty('360DegreeNormal',    2,    2,    7.5,    8.5, 1.4, 1))
+print(difficulty('360DegreeHard',      3,    3,    7.5,  9.5, 2.5, 1))
+print(difficulty('360DegreeExpert',    3.5,  3.5,  7.5,    9.75, 3.2, 1))
+print(difficulty('360DegreeExpertPlus', 4,    4,    7.5,  10, 3.3, 1))
 
 os.chdir(pathname)
 shutil.make_archive(FileNamer, 'zip', tempname)
