@@ -1,1 +1,2 @@
-cmd /c "py -m converter.py"
+
+cmd /c "py -m Saber2Osu.py"
