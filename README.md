@@ -4,4 +4,6 @@ I included a run.bat which launches the thing, but obviously it requires you to 
 
 I made this so that I could use beat sage without owning beat saber.
 
-There are no sliders or anything, converted beatmaps are literally copies of beat saber beatmaps but in osu.
+Two versions are included.
+- V1 directly converts both timings and positions of the circles, which means circles can only have 9 different positions as they do in BeatSaber.
+- V2 converts timings and places notes randomly based on how their distance in time, trying to emulate actual OSU! beatmaps.
