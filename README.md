@@ -5,5 +5,5 @@ I included .bat files to launch the thing, but obviously it requires you to inst
 I made this so that I could use beat sage without owning beat saber.
 
 Two versions are included.
-- V1 directly converts both timings and positions of the circles, which means circles can only have 9 different positions as they do in BeatSaber.
 - V2 converts timings and places notes randomly based on how their distance in time, trying to emulate actual OSU! beatmaps.
+- V1 directly converts both timings and positions of the circles, which means circles can only have 9 different positions as they do in BeatSaber. Also it will straight up ignore events such as bombs and obstacles
